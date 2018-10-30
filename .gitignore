@@ -1,3 +1,6 @@
+# We need to make sure people don't commit the file containing the "secret"
+# access keys for services like Fixer.io
+etc/access_keys.properties
 
 # Created by https://www.gitignore.io/api/java,intellij
 

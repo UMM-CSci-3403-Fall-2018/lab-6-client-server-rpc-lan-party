@@ -26,8 +26,8 @@ local function calls.
 
 ### <span name="RPC_encapsulation"></span> RPC encapsulation
 
-The starter code and some JUnit tests for this part of the lab are provided
-in this repository; after following the github classroom link from canvas you should 
+This is the starter code and some JUnit tests for this part of the lab; 
+after following the github classroom link from canvas you should 
 complete your implementation in your group's new repository.
 
 Financial programs often need access to financial rates such as stock prices and
