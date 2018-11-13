@@ -10,6 +10,7 @@ import jdk.internal.util.xml.impl.Input;
 
 import java.io.*;
 import java.net.URL;
+import java.io.IOException;
 
 /**
  * Provide access to basic currency exchange rate services.
@@ -33,17 +34,8 @@ public class ExchangeRateReader {
      * @param baseURL
      *            the base URL for requests
      */
-    public ExchangeRateReader(String baseURL) {
-        BASE_URL = baseURL;
     public ExchangeRateReader(String baseURL) throws IOException {
-        /*
-         * DON'T DO MUCH HERE!
-         * People often try to do a lot here, but the action is actually in
-         * the two methods below. All you need to do here is store the
-         * provided `baseURL` in a field so it will be accessible later.
-         */
-
-        // TODO Your code here
+        BASE_URL = baseURL;
 
         // Reads the access keys from `etc/access_keys.properties`
         readAccessKeys();
@@ -86,6 +78,7 @@ public class ExchangeRateReader {
      * @param currencyCode
      *            the currency code for the desired currency
      * @param year
+
      *            the year as a four digit integer
      * @param month
      *            the month as an integer (1=Jan, 12=Dec)
@@ -107,7 +100,7 @@ public class ExchangeRateReader {
             dayString = "0" + day;
         } else { dayString = "" + day; }
 
-        String urlString = BASE_URL + year + "-" + monthString + "-" + dayString + "?access_key=";
+        String urlString = BASE_URL + year + "-" + monthString + "-" + dayString + "?access_key=" + accessKey;
         URL url = new URL(urlString);
         InputStream inputStream = url.openStream();
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
@@ -118,10 +111,6 @@ public class ExchangeRateReader {
         float rate = json.getAsJsonObject("rates").get(currencyCode).getAsFloat();
 
         return rate;
-        // TODO Your code here
-
-        // Remove the next line when you've implemented this method.
-        throw new UnsupportedOperationException();
     }
 
     /**
@@ -150,9 +139,5 @@ public class ExchangeRateReader {
         float toRate = getExchangeRate(toCurrency, year, month, day);
 
         return fromRate / toRate;
-        // TODO Your code here
-
-        // Remove the next line when you've implemented this method.
-        throw new UnsupportedOperationException();
     }
 }
